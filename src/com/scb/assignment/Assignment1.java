@@ -23,42 +23,40 @@ public class Assignment1 {
             System.out.println("Please insert input data ");
             System.out.println("Input format => name : card1 card2 card3 card4 card5");
             boolean isReRun = true;
+            boolean isWait;
+            String temp;
+            Scanner userInput;
+            UserModel user1 = null;
+            UserModel user2 = null; 
+            
             while (isReRun) {
-                boolean isWait = true;
-                String temp = null;
-                Scanner userInput = new Scanner(System.in);
-                UserModel user1 = new UserModel();
-                UserModel user2 = new UserModel();
-                // Input data user1
-                System.out.println("Please insert Player 1 :");
-                while (isWait) {
-                    temp = userInput.nextLine();
-                    temp = temp.trim();
-                    if (!validateUserInput(temp)) {
-                        System.out.println("Please insert Player 1 again :");
-                    } else {
-                        user1 = setUserData(temp);
-                        calRank(user1);
-                        isWait = false;
-                    }
-                }
-
-                // Input data user2
-                System.out.println("Please insert Player 2 :");
                 isWait = true;
-                while (isWait) {
-                    temp = userInput.nextLine();
-                    temp = temp.trim();
-                    if (!validateUserInput(temp)) {
-                        System.out.println("Please insert Player 2 again :");
-                    } else {
-                        user2 = setUserData(temp);
-                        calRank(user2);
-                        isWait = false;
+                temp = "";
+                while (user1==null || user2==null){
+                    // Input data user
+                    System.out.println("Please insert Player " + (user1==null?"1":"2") + ":");
+                    while (isWait) {
+                        userInput = new Scanner(System.in);
+                        temp = userInput.nextLine();
+                        temp = temp.trim();
+                        if (!validateUserInput(temp)) {
+                            System.out.println("Please insert Player "+ (user1==null?"1":"2") +" again :");
+                        } else {
+                            if(user1 == null){
+                                user1 = setUserData(temp);
+                                calRank(user1);
+                                isWait = false;
+                            }else{
+                                user2 = setUserData(temp);
+                                calRank(user2);
+                                isWait = false;
+                            }
+                        }
                     }
+                    isWait =true;
                 }
                 // Check all card
-                if(!validateAllCard(user1, user2)){
+                if(!checkDuplicateCard(user1, user2)){
                     System.out.println("Please try again");
                 }else{
                     System.out.println("Calculate Result");
@@ -66,9 +64,13 @@ public class Assignment1 {
                 }
                 System.out.println();
                 System.out.println("Run again please type any characters OR Exit \"E\"");
+                userInput = new Scanner(System.in);
                 temp = userInput.nextLine();
                 if (temp.equals("E")) {
                     System.exit(0);
+                }else{
+                    user1 = null;
+                    user2 = null;
                 }
             }
 
@@ -80,12 +82,7 @@ public class Assignment1 {
     
     // <editor-fold defaultstate="collapsed" desc="user-data-input-Method">
     private static boolean validateUserInput(String in) throws Exception {
-        String regEx = "([\\w ]+):"
-                + "[ ]*([(2-9)|T|J|Q|K|A)])(C|D|H|S) "
-                + "[ ]*([(2-9)|T|J|Q|K|A)])(C|D|H|S)"
-                + "[ ]*([(2-9)|T|J|Q|K|A)])(C|D|H|S)"
-                + "[ ]*([(2-9)|T|J|Q|K|A)])(C|D|H|S)"
-                + "[ ]*([(2-9)|T|J|Q|K|A)])(C|D|H|S)";
+        String regEx = "([\\w ]+):([ ]*[(2-9)|T|J|Q|K|A][C|D|H|S]){5}";
         if (in.matches(regEx)) {
             return true;
         } else {
@@ -122,17 +119,13 @@ public class Assignment1 {
         return user;
     }
     
-    private static boolean validateAllCard(UserModel user1, UserModel user2){
+    private static boolean checkDuplicateCard(UserModel user1, UserModel user2){
         List<String> card = new ArrayList<>();
-        for(String c : user1.getCardFull()){
-            if(card.contains(c)){
-                System.out.println("Dupicate card " + c);
-                return false;
-            }else{
-                card.add(c);
-            }
-        }
-        for(String c : user2.getCardFull()){
+        String[] allCard = new String[user1.getCardFull().length + user2.getCardFull().length];
+        System.arraycopy(user1.getCardFull(), 0, allCard, 0, user1.getCardFull().length);
+        System.arraycopy(user2.getCardFull(), 0, allCard, user1.getCardFull().length, user2.getCardFull().length);
+        
+        for(String c : allCard){
             if(card.contains(c)){
                 System.out.println("Dupicate card " + c);
                 return false;
