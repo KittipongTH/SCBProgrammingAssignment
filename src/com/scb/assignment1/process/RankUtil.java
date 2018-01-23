@@ -195,7 +195,7 @@ public class RankUtil {
         return num;
     }
 
-    private static int findNumValueArr(char[] arr, char value) {
+    /*private static int findNumValueArr(char[] arr, char value) {
         int num = 0;
         for (char a : arr) {
             if (a == value) {
@@ -203,7 +203,7 @@ public class RankUtil {
             }
         }
         return num;
-    }
+    }*/
 
     private static int findNumValueArr(int[] arr, int value) {
         int num = 0;

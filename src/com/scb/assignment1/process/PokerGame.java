@@ -53,7 +53,8 @@ public class PokerGame {
         System.out.println("Run again please type any characters OR Exit \"E\"");
         Scanner userInput = new Scanner(System.in);
         if (userInput.nextLine().equals("E")) {
-            System.exit(0);
+            Runtime.getRuntime().exit(0);
+            //System.exit(0);
         }
         return true; 
     }

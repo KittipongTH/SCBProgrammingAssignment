@@ -15,7 +15,7 @@ import com.scb.assignment1.model.ResultModel;
  */
 public class PokerUtil {
 
-    private static final String REGEX_CARD = "([\\w ]+):([ ]*[(2-9)|T|J|Q|K|A][C|D|H|S]){5}";
+    private static final String REGEX_CARD = "([\\w ]+):([ ]+[(2-9)|T|J|Q|K|A][C|D|H|S]){5}";
     
     public enum ResultEnum{
         TIE, PLAYER1, PLAYER2;
@@ -101,7 +101,7 @@ public class PokerUtil {
                     if(player1.getCard().getCardSuit()[0].code > player2.getCard().getCardSuit()[0].code){
                         result.setDesc(player1.getCard().getCardSuit()[0].name);
                     }else{
-                        result.setDesc(player1.getCard().getCardSuit()[0].name);
+                        result.setDesc(player2.getCard().getCardSuit()[0].name);
                     }
                     result.setIsSuitWin(true);
                 }else{

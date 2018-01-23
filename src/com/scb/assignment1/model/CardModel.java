@@ -9,6 +9,7 @@ import com.scb.assignment1.process.CardUtil.CardSuit;
 import com.scb.assignment1.process.CardUtil.PokerRank;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -38,27 +39,36 @@ public class CardModel {
     }
     
     public String[] getCardFull() {
-        return cardFull;
+        return Arrays.copyOf(cardFull, cardFull.length);
+        //return cardFull;
     }
 
     public void setCardFull(String[] cardFull) {
-        this.cardFull = cardFull;
+        this.cardFull = new String[cardFull.length];
+        System.arraycopy(cardFull, 0, this.cardFull, 0, cardFull.length);
+        //this.cardFull = cardFull;
     }
 
     public int[] getCardValue() {
-        return cardValue;
+        return Arrays.copyOf(cardValue, cardValue.length);
+        //return cardValue;
     }
 
     public void setCardValue(int[] cardValue) {
-        this.cardValue = cardValue;
+        this.cardValue = new int[cardValue.length];
+        System.arraycopy(cardValue, 0, this.cardValue, 0, cardValue.length);
+        //this.cardValue = cardValue;
     }
 
     public CardSuit[] getCardSuit() {
-        return cardSuit;
+        return Arrays.copyOf(cardSuit, cardSuit.length);
+        //return cardSuit;
     }
 
     public void setCardSuit(CardSuit[] cardSuit) {
-        this.cardSuit = cardSuit;
+        this.cardSuit = new CardSuit[cardSuit.length];
+        System.arraycopy(cardSuit, 0, this.cardSuit, 0, cardSuit.length);
+        //this.cardSuit = cardSuit;
     }
 
 

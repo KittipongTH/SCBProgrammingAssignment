@@ -69,6 +69,7 @@ public class CardUtil {
             return card;
         } catch (Exception ex) {
             System.err.println("Problem to get card");
+            ex.printStackTrace();
             throw ex;
         }
     }
@@ -90,7 +91,7 @@ public class CardUtil {
         }
     }
 
-    private static String convertRank(int rank) {
+    /*private static String convertRank(int rank) {
         switch (rank) {
             case 9:
                 return "Straight flush";
@@ -111,7 +112,7 @@ public class CardUtil {
             default:
                 return "High Card";
         }
-    }
+    }*/
 
     private static CardSuit convertSuitEnum(char suit) {
         switch (suit) {
@@ -126,9 +127,9 @@ public class CardUtil {
             default:
                 return null;
         }
-    }    
+    }
     
-    private static String convertSuit(char suit) {
+    /*private static String convertSuit(char suit) {
         switch (suit) {
             case 'C':
                 return "Clubs";
@@ -141,7 +142,7 @@ public class CardUtil {
             default:
                 return "";
         }
-    }
+    }*/
 
     public static String convertCard(int card) {
         //  jack, queen, king, ace 

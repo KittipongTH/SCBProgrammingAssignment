@@ -21,7 +21,8 @@ public class SCBAssignment1 {
             }
         }catch(Exception ex){
             System.out.println("Error, Please try again.");
-            ex.printStackTrace();
+            System.err.println(ex);
+            //ex.printStackTrace();
         }
     }
 }
